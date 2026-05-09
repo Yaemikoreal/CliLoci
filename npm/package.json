@@ -1,0 +1,41 @@
+{
+  "name": "@yaemikoreal/loci",
+  "version": "0.1.0",
+  "description": "A minimalist CLI launcher — list, filter, and jump to any executable on your PATH.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yaemikoreal/CliLoci"
+  },
+  "homepage": "https://github.com/Yaemikoreal/CliLoci#readme",
+  "keywords": [
+    "cli",
+    "launcher",
+    "fuzzy-finder",
+    "path",
+    "executable",
+    "toolbelt"
+  ],
+  "bin": {
+    "loci": "bin/loci.js"
+  },
+  "files": [
+    "bin/loci.js",
+    "install.js"
+  ],
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ]
+}

@@ -1,0 +1,18 @@
+[package]
+name = "loci"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+skim = { version = "4.6", default-features = false, features = ["frizbee"] }
+dirs = "5"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+
+[profile.release]
+opt-level = "z"     # optimize for size
+lto = true          # link-time optimization
+strip = true        # strip symbols
+codegen-units = 1   # single codegen unit for better optimization
+panic = "abort"     # remove unwind tables
