@@ -86,10 +86,12 @@ jobs:
 
       - name: Generate checksums
         run: |
-          for f in */${{ env.BINARY_NAME }}*; do
-            mv "$f" "$(basename "$f")"
+          for dir in loci-*; do
+            if [ -d "$dir" ]; then
+              mv "$dir"/* .
+              rmdir "$dir"
+            fi
           done
-          rmdir */
           sha256sum loci-* > checksums.txt
 
       - name: Create Release
