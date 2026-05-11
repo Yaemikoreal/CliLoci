@@ -86,12 +86,7 @@ jobs:
 
       - name: Generate checksums
         run: |
-          for dir in loci-*; do
-            if [ -d "$dir" ]; then
-              mv "$dir"/* .
-              rmdir "$dir"
-            fi
-          done
+          find . -name "loci-*" -type f -exec mv {} . \;
           sha256sum loci-* > checksums.txt
 
       - name: Create Release
