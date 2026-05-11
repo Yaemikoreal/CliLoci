@@ -29,7 +29,7 @@ if (!target) {
 
 // ── Version & URL ────────────────────────────────────────────────────
 const VERSION = 'v0.1.0';
-const RELEASE_URL = `https://github.com/YOUR_USER/loci/releases/download/${VERSION}/${target.artifact}`;
+const RELEASE_URL = `https://github.com/Yaemikoreal/CliLoci/releases/download/${VERSION}/${target.artifact}`;
 
 const binDir = __dirname; // npm/ directory
 const destPath = path.join(binDir, target.binary);
