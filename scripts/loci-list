@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""
+loci-list — Agent-friendly wrapper around `loci -l --json`.
+
+Usage:
+  loci-list                    → JSON: all executables
+  loci-list <keyword>          → JSON: filtered by keyword
+  loci-list <keyword> --text   → Plain text (one per line)
+
+Output is always written to stdout. Errors to stderr.
+When this script is not available, fall back to `loci -l --json` directly.
+"""
+import json
+import subprocess
+import sys
+
+
+def loci_list(keyword=None, text_mode=False):
+    cmd = ["loci", "-l", "--json"]
+    if keyword:
+        cmd.append(keyword)
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+    except FileNotFoundError:
+        print("error: loci not found. install: npm install -g @yaemikoreal/loci", file=sys.stderr)
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"error: loci exited with code {e.returncode}", file=sys.stderr)
+        if e.stderr:
+            print(e.stderr, file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        data = json.loads(result.stdout)
+    except json.JSONDecodeError:
+        print("error: failed to parse loci output", file=sys.stderr)
+        sys.exit(1)
+
+    if text_mode:
+        for exe in data["executables"]:
+            print(exe)
+    else:
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    keyword = None
+    text_mode = False
+    args = [a for a in sys.argv[1:] if a != "--text"]
+    text_mode = "--text" in sys.argv[1:]
+
+    if args:
+        keyword = " ".join(args)
+
+    loci_list(keyword, text_mode)

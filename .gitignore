@@ -1,1 +1,9 @@
 /target
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.claude/
+checksums.txt
+CliLoci思路.md
+CliLoci思绪.md

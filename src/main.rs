@@ -9,12 +9,12 @@ fn main() {
 
     // ── Argument parsing ────────────────────────────────────────────
     //
-    //   loci -l|--list [filter]         print executables and exit
+    //   loci -l|--list [--json] [filter]    print executables and exit
     //   loci [filter...] [-- forwarded-args...]
     //
     // Everything before `--` is a pre-filter string passed to skim.
     // Everything after `--` is forwarded to the selected executable.
-    let (list_mode, filter, forwarded) = parse_args(&args);
+    let (list_mode, json_mode, filter, forwarded) = parse_args(&args);
 
     // ── Collect executables ─────────────────────────────────────────
     let scanner = scanner::Scanner::new();
@@ -34,8 +34,19 @@ fn main() {
                 .collect(),
             None => executables.iter().collect(),
         };
-        for exe in filtered {
-            println!("{}", exe);
+
+        if json_mode {
+            let names: Vec<&str> = filtered.iter().map(|s| s.as_str()).collect();
+            let output = serde_json::json!({
+                "total": names.len(),
+                "executables": names,
+                "filter": filter,
+            });
+            println!("{}", serde_json::to_string_pretty(&output).unwrap());
+        } else {
+            for exe in filtered {
+                println!("{}", exe);
+            }
         }
         process::exit(0);
     }
@@ -52,22 +63,32 @@ fn main() {
     launch(&tool, &forwarded);
 }
 
-/// Parse CLI arguments into (list_mode, filter, forwarded_args).
-fn parse_args(args: &[String]) -> (bool, Option<String>, Vec<&str>) {
+/// Parse CLI arguments into (list_mode, json_mode, filter, forwarded_args).
+fn parse_args(args: &[String]) -> (bool, bool, Option<String>, Vec<&str>) {
     if args.len() <= 1 {
-        return (false, None, vec![]);
+        return (false, false, None, vec![]);
     }
+
+    // Scan for --json anywhere in args (position-independent)
+    let json_mode = args[1..].iter().any(|a| a == "--json");
 
     // Check for -l / --list flag
     let list_mode = args[1] == "-l" || args[1] == "--list";
     let start = if list_mode { 2 } else { 1 };
 
     if start >= args.len() {
-        return (list_mode, None, vec![]);
+        return (list_mode, json_mode, None, vec![]);
     }
 
-    let rest = &args[start..];
-    let dashdash = rest.iter().position(|a| a == "--");
+    // Collect filter tokens, skipping --json (which would otherwise
+    // be consumed as a filter string in e.g. `loci -l --json`).
+    let rest: Vec<&str> = args[start..]
+        .iter()
+        .filter(|a| a.as_str() != "--json")
+        .map(String::as_str)
+        .collect();
+
+    let dashdash = rest.iter().position(|a| *a == "--");
 
     let filter = match dashdash {
         Some(0) => None,
@@ -77,10 +98,10 @@ fn parse_args(args: &[String]) -> (bool, Option<String>, Vec<&str>) {
     };
 
     let forwarded: Vec<&str> = dashdash
-        .map(|pos| rest[pos + 1..].iter().map(String::as_str).collect())
+        .map(|pos| rest[pos + 1..].to_vec())
         .unwrap_or_default();
 
-    (list_mode, filter, forwarded)
+    (list_mode, json_mode, filter, forwarded)
 }
 
 /// Simple case-insensitive substring match for `loci -l <filter>`.

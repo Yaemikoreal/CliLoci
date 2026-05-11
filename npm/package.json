@@ -14,7 +14,11 @@
     "fuzzy-finder",
     "path",
     "executable",
-    "toolbelt"
+    "toolbelt",
+    "agent",
+    "ai",
+    "tool-discovery",
+    "skill"
   ],
   "bin": {
     "loci": "bin/loci.js"

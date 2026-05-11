@@ -2,6 +2,9 @@
 name = "loci"
 version = "0.1.0"
 edition = "2021"
+description = "A minimalist CLI launcher — list, filter, and jump to any executable on your PATH. AI Agent friendly with --json output."
+categories = ["command-line-utilities", "development-tools"]
+keywords = ["cli", "launcher", "fuzzy-finder", "path", "executable", "tool-discovery", "agent", "ai"]
 
 [dependencies]
 skim = { version = "4.6", default-features = false, features = ["frizbee"] }
