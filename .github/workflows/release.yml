@@ -83,10 +83,13 @@ jobs:
       contents: write
     steps:
       - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: loci-*
 
       - name: Generate checksums
         run: |
-          find . -name "loci-*" -type f -exec mv {} . \;
+          mv artifacts/*/* .
           sha256sum loci-* > checksums.txt
 
       - name: Create Release
