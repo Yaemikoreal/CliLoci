@@ -1,6 +1,6 @@
 {
   "name": "@yaemikoreal/loci",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A minimalist CLI launcher — list, filter, and jump to any executable on your PATH.",
   "license": "MIT",
   "repository": {
