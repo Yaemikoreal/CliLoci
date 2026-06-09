@@ -7,6 +7,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub release](https://img.shields.io/github/v/release/Yaemikoreal/CliLoci)](https://github.com/Yaemikoreal/CliLoci/releases)
+[![Crates.io](https://img.shields.io/crates/v/loci-cli)](https://crates.io/crates/loci-cli)
 
 [English](#english) · [中文](#中文)
 
@@ -48,8 +49,8 @@ $ loci
 ## Quick Install
 
 ```sh
-# Build from source (requires Rust)
-cargo install --path .
+# Install from crates.io (requires Rust)
+cargo install loci-cli
 
 # Or download a pre-built binary from GitHub Releases
 ```
@@ -185,8 +186,8 @@ $ loci
 ## 一键安装
 
 ```sh
-# 从源码构建（需安装 Rust）
-cargo install --path .
+# 从 crates.io 安装（需安装 Rust）
+cargo install loci-cli
 
 # 或直接从 GitHub Releases 下载预编译二进制
 ```
