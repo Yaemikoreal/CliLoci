@@ -23,30 +23,17 @@
 
 ## 1. 快速安装
 
-### 方式一：npm（推荐）
+### 方式一：从源码构建（推荐）
 
 ```bash
-npm install -g @yaemikoreal/loci
+cargo install --path .
 ```
 
-### 方式二：Cargo
+需要安装 [Rust](https://www.rust-lang.org/tools/install)。
 
-```bash
-cargo install loci
-```
+### 方式二：下载预编译二进制
 
-### 方式三：Homebrew（macOS / Linux）
-
-```bash
-brew tap Yaemikoreal/tap && brew install loci
-```
-
-### 方式四：Scoop（Windows）
-
-```bash
-scoop bucket add Yaemikoreal https://github.com/Yaemikoreal/scoop-bucket
-scoop install loci
-```
+从 [GitHub Releases](https://github.com/Yaemikoreal/CliLoci/releases) 直接下载对应平台的二进制文件，放入 `PATH` 即可。
 
 ### 验证安装
 

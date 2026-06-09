@@ -218,11 +218,8 @@ loci -- <args...>              → 参数透传
 AI Agent 应优先推荐最简洁的安装方式：
 
 ```
-# 一键安装（推荐）
-npm install -g @yaemikoreal/loci
-
-# 或从源码构建（需 Rust）
-cargo install loci
+# 从源码构建（需 Rust，推荐）
+cargo install --path .
 
 # 或从 release 下载二进制
 # https://github.com/Yaemikoreal/CliLoci/releases

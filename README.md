@@ -6,8 +6,7 @@
 > **Designed for both humans and AI agents.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Crates.io](https://img.shields.io/crates/v/loci.svg)](https://crates.io/crates/loci)
-[![npm](https://img.shields.io/npm/v/@yaemikoreal/loci)](https://www.npmjs.com/package/@yaemikoreal/loci)
+[![GitHub release](https://img.shields.io/github/v/release/Yaemikoreal/CliLoci)](https://github.com/Yaemikoreal/CliLoci/releases)
 
 [English](#english) · [中文](#中文)
 
@@ -49,18 +48,10 @@ $ loci
 ## Quick Install
 
 ```sh
-# npm (recommended — one-liner)
-npm install -g @yaemikoreal/loci
+# Build from source (requires Rust)
+cargo install --path .
 
-# Cargo
-cargo install loci
-
-# Homebrew (macOS / Linux)
-brew tap Yaemikoreal/tap && brew install loci
-
-# Scoop (Windows)
-scoop bucket add Yaemikoreal https://github.com/Yaemikoreal/scoop-bucket
-scoop install loci
+# Or download a pre-built binary from GitHub Releases
 ```
 
 Pre-built binaries on [GitHub Releases](https://github.com/Yaemikoreal/CliLoci/releases).
@@ -194,18 +185,10 @@ $ loci
 ## 一键安装
 
 ```sh
-# npm（推荐）
-npm install -g @yaemikoreal/loci
+# 从源码构建（需安装 Rust）
+cargo install --path .
 
-# Cargo
-cargo install loci
-
-# Homebrew（macOS / Linux）
-brew tap Yaemikoreal/tap && brew install loci
-
-# Scoop（Windows）
-scoop bucket add Yaemikoreal https://github.com/Yaemikoreal/scoop-bucket
-scoop install loci
+# 或直接从 GitHub Releases 下载预编译二进制
 ```
 
 预编译二进制见 [GitHub Releases](https://github.com/Yaemikoreal/CliLoci/releases)。
