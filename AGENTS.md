@@ -80,4 +80,4 @@ else:
 
 ---
 
-**版本**: 0.1.0 | **相关文件**: [`SKILL.md`](./SKILL.md), [`README.md`](./README.md)
+**版本**: 0.2.0 | **相关文件**: [`SKILL.md`](./SKILL.md), [`README.md`](./README.md)

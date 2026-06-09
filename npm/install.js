@@ -28,7 +28,9 @@ if (!target) {
 }
 
 // ── Version & URL ────────────────────────────────────────────────────
-const VERSION = 'v0.1.0';
+// Uses npm_package_version env var (set by npm during postinstall),
+// falling back to reading package.json directly.
+const VERSION = 'v' + (process.env.npm_package_version || require('./package.json').version);
 const RELEASE_URL = `https://github.com/Yaemikoreal/CliLoci/releases/download/${VERSION}/${target.artifact}`;
 
 const binDir = __dirname; // npm/ directory

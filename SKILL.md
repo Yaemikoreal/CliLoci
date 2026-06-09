@@ -16,7 +16,7 @@ trigger: |
   - The agent needs to discover what tools are available for a task
   - The context requires understanding the user's CLI environment
 type: tool
-version: "0.1.0"
+version: "0.2.0"
 ---
 
 # loci — AI  CLI Tool Discovery Skill
@@ -74,6 +74,7 @@ $ loci -l
 
 ```json
 {
+  "skill_version": "v0.2.0",
   "total": 142,
   "executables": ["7z", "7za", "7zr", ...],
   "filter": null
@@ -84,9 +85,30 @@ $ loci -l
 
 ```json
 {
+  "skill_version": "v0.2.0",
   "total": 3,
   "executables": ["cargo", "cargo-clippy", "cargo-fmt"],
   "filter": "cargo"
+}
+```
+
+**高级 JSON 模式**（`--meta` 或 `--tag`）：
+
+```json
+{
+  "skill_version": "v0.2.0",
+  "total": 3,
+  "executables": ["cargo", "git", "python"],
+  "filter": null,
+  "tag_filter": "scm",
+  "meta": {
+    "git": {
+      "version": "git version 2.52.0",
+      "category": "scm",
+      "tags": ["scm"],
+      "path": "/usr/bin/git"
+    }
+  }
 }
 ```
 
@@ -158,6 +180,15 @@ sensors
 export LOCI_PATH_EXTRA="$HOME/.local/bin:$HOME/go/bin"
 ```
 
+### 虚拟环境
+
+虚拟环境（Python venv、conda env、npm global）在**激活后**会自动加入 `PATH`，loci 可直接扫到。
+如需扫描未激活的虚拟环境，将其 `bin/`（Unix）或 `Scripts/`（Windows）目录加入 `LOCI_PATH_EXTRA`：
+
+```sh
+export LOCI_PATH_EXTRA="$HOME/projects/myapp/.venv/bin:$LOCI_PATH_EXTRA"
+```
+
 Agent 可以在检测到常见工具目录（如 `~/.cargo/bin`、`~/.local/bin`、`~/go/bin`）不在 `PATH` 中时，提示用户添加。
 
 ## CLI 参考
@@ -167,8 +198,17 @@ loci                           → 交互式模糊查找器
 loci <filter>                  → 预过滤后进入交互式查找器
 loci -l                        → 打印所有可执行文件（无 TUI）
 loci -l <filter>               → 打印匹配的可执行文件
-loci -l --json                 → JSON 格式输出
+loci -l --json                 → JSON 格式输出（含 skill_version）
 loci -l --json <filter>        → JSON 格式输出（带过滤）
+loci -l --json --meta          → JSON + 元数据（版本/类别/路径）
+loci -l --json --meta <filter> → JSON + 元数据（带过滤）
+loci -l --json --tag scm       → JSON + 按标签 scm 过滤（自动含元数据）
+loci -l --json --tag scm git   → JSON + 标签 + 关键词过滤
+loci -l --project              → 只列出当前项目本地工具
+loci -l --project --json       → 项目工具（JSON 格式）
+loci --exact <filter>          → 精确匹配后直接启动
+loci --pick-first <filter>     → 选第一个匹配启动
+loci --index N <filter>        → 选第 N 个（0-based）匹配启动
 loci <filter> -- <args...>     → 预过滤 + 参数透传给选中工具
 loci -- <args...>              → 参数透传
 ```
@@ -209,4 +249,4 @@ cargo install loci
 
 ---
 
-> **Skill 版本**: 0.1.0 | **项目主页**: https://github.com/Yaemikoreal/CliLoci
+> **Skill 版本**: 0.2.0 | **项目主页**: https://github.com/Yaemikoreal/CliLoci
