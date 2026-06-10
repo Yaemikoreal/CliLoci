@@ -1,4 +1,4 @@
-# Loci 操作文档 v0.2.0
+# Loci 操作文档 v0.2.1
 
 > 极简 CLI 启动器 —— 列出 PATH 中所有可执行文件，模糊搜索后一键跳转。  
 > **设计哲学：只列出，只跳转。** 不管理版本、不安装包、不记忆别名。
@@ -293,7 +293,7 @@ set LOCI_PATH_EXTRA=C:\tools\bin;D:\my-scripts
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 142,
   "executables": ["7z", "7za", "cargo", "git", "python", "zip", ...],
   "filter": null
@@ -304,7 +304,7 @@ set LOCI_PATH_EXTRA=C:\tools\bin;D:\my-scripts
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 5,
   "executables": ["git", "git-lfs", "git-credential-manager", ...],
   "filter": "git"
@@ -315,7 +315,7 @@ set LOCI_PATH_EXTRA=C:\tools\bin;D:\my-scripts
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 3,
   "executables": ["cargo", "git", "python"],
   "filter": null,
@@ -335,7 +335,7 @@ set LOCI_PATH_EXTRA=C:\tools\bin;D:\my-scripts
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 2,
   "executables": ["my-app", "test-runner"],
   "filter": null,
@@ -347,7 +347,7 @@ set LOCI_PATH_EXTRA=C:\tools\bin;D:\my-scripts
 
 | 字段 | 类型 | 出现条件 | 说明 |
 |------|------|----------|------|
-| `skill_version` | string | 始终 | 编译时常量 `v0.2.0` |
+| `skill_version` | string | 始终 | 编译时常量 `v0.2.1` |
 | `total` | number | 始终 | `executables` 数组长度 |
 | `executables` | string[] | 始终 | 工具名列表 |
 | `filter` | string\|null | 始终 | 过滤关键词，无过滤时为 null |
@@ -451,4 +451,4 @@ PATH 环境变量 + LOCI_PATH_EXTRA
 
 ---
 
-> **版本**: 0.2.0 | **许可**: MIT | **仓库**: https://github.com/Yaemikoreal/CliLoci
+> **版本**: 0.2.1 | **许可**: MIT | **仓库**: https://github.com/Yaemikoreal/CliLoci

@@ -7,8 +7,9 @@
 当用户的需求涉及 CLI 工具发现、查找、启动时，AI Agent 应加载本仓库作为技能包：
 
 1. **加载入口**: 读取 [`SKILL.md`](./SKILL.md) 获取完整的技能协议
-2. **二进制依赖**: 确保 `loci` 已安装在用户系统上（`which loci` / `where loci`）
-3. **首次使用**: 先运行 `loci -l --json` 预热缓存
+2. **权限约束**: Agent 必须遵守 SKILL.md 中的[Agent 能力约束表](./SKILL.md#agent-能力约束)，自动启动工具前必须先告知用户
+3. **二进制依赖**: 确保 `loci` 已安装在用户系统上（`which loci` / `where loci`）
+4. **首次使用**: 先运行 `loci -l --json` 预热缓存
 
 ## Agent 工作流
 
@@ -80,4 +81,4 @@ else:
 
 ---
 
-**版本**: 0.2.0 | **相关文件**: [`SKILL.md`](./SKILL.md), [`README.md`](./README.md)
+**版本**: 0.2.1 | **相关文件**: [`SKILL.md`](./SKILL.md), [`README.md`](./README.md)

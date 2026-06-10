@@ -16,7 +16,7 @@ trigger: |
   - The agent needs to discover what tools are available for a task
   - The context requires understanding the user's CLI environment
 type: tool
-version: "0.2.0"
+version: "0.2.1"
 ---
 
 # loci — AI  CLI Tool Discovery Skill
@@ -74,7 +74,7 @@ $ loci -l
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 142,
   "executables": ["7z", "7za", "7zr", ...],
   "filter": null
@@ -85,7 +85,7 @@ $ loci -l
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 3,
   "executables": ["cargo", "cargo-clippy", "cargo-fmt"],
   "filter": "cargo"
@@ -96,7 +96,7 @@ $ loci -l
 
 ```json
 {
-  "skill_version": "v0.2.0",
+  "skill_version": "v0.2.1",
   "total": 3,
   "executables": ["cargo", "git", "python"],
   "filter": null,
@@ -111,6 +111,21 @@ $ loci -l
   }
 }
 ```
+
+### Agent 能力约束
+
+| 操作 | 自主执行 | 需确认 |
+|------|----------|--------|
+| `loci -l --json` 列出工具 | ✅ 无需询问 | — |
+| `loci --exact <name>` 自动启动 | ❌ | 必须先告知用户要启动哪个工具 |
+| `loci --pick-first <name>` 自动启动 | ❌ | 必须先告知用户 |
+| `loci --index N <name>` 自动启动 | ❌ | 必须先告知用户 |
+| `loci` 交互模式 TUI | ✅ 需说明"正在打开工具选择器" | — |
+| `loci --meta` 版本探测 | ✅ 只读操作，不会修改系统 | — |
+| `loci --project` 项目模式 | ✅ 无需询问 | — |
+| `loci -l` 列表模式 | ✅ 无需询问 | — |
+
+Agent **不得**在未告知用户的情况下自动执行选中的工具。所有自动启动方式（`--exact`、`--pick-first`、`--index`）必须让用户知情并确认。
 
 ### 缓存策略
 
@@ -246,4 +261,4 @@ cargo install --path .
 
 ---
 
-> **Skill 版本**: 0.2.0 | **项目主页**: https://github.com/Yaemikoreal/CliLoci
+> **Skill 版本**: 0.2.1 | **项目主页**: https://github.com/Yaemikoreal/CliLoci

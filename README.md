@@ -137,6 +137,15 @@ export LOCI_PATH_EXTRA="$HOME/projects/myapp/.venv/bin:$LOCI_PATH_EXTRA"
 5. Launches skim TUI for fuzzy selection, or prints list / JSON in list mode  
 6. Selected tool replaces the current process (Unix `exec`) or spawns + waits (Windows)
 
+## Limitations
+
+- **No alias or shell-function discovery** — `loci` only scans `PATH`. Aliases (`alias ll='ls -la'`), shell functions, and builtins are invisible.
+- **No version management** — cannot install, switch, or pin tool versions. Use `asdf`, `mise`, or your system package manager for that.
+- **No package installation** — cannot install tools. Use `cargo install`, `npm install`, `apt`, `brew`, etc.
+- **No remote / container discovery** — only works on the local machine. Cannot list tools on SSH hosts, inside Docker containers, or on Kubernetes clusters.
+- **Metadata is best-effort** — `--meta` probes each tool with `--version` (3s timeout per tool). Some tools may not support it, timeout, or (in rare cases) spawn a GUI window.
+- **Tags are static heuristics** — categories are inferred from tool names using a built-in rule engine. The tag system is not learned or community-sourced.
+
 ## Development
 
 ```sh
@@ -266,6 +275,15 @@ export LOCI_PATH_EXTRA="$HOME/projects/myapp/.venv/bin:$LOCI_PATH_EXTRA"
 4. SHA-256 指纹缓存结果
 5. 启动 skim TUI 模糊选择，或列表模式直接输出 / JSON 输出
 6. 选中后 Unix 用 `exec` 替换进程，Windows 创建子进程并等待
+
+## 设计边界
+
+- **不发现别名/函数** — `loci` 只扫描 `PATH`，shell 别名（`alias ll='ls -la'`）、函数、内建命令不在列表中
+- **不管理版本** — 不能安装、切换、固定工具版本。请使用 `asdf`、`mise` 或系统包管理器
+- **不安装包** — 不能安装新工具。请使用 `cargo install`、`npm install`、`apt`、`brew` 等
+- **不支持远程/容器** — 仅扫描本机 PATH，无法发现 SSH 远程主机、Docker 容器、Kubernetes 集群中的工具
+- **元数据是 best-effort** — `--meta` 对每个工具运行 `--version`（3 秒超时），部分工具可能不支持、超时或（罕见情况）弹出 GUI 窗口
+- **标签是静态启发式** — 类别通过内置规则引擎从工具名推断，非学习/社区驱动
 
 ## 开发
 

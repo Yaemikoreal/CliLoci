@@ -122,6 +122,26 @@ impl Scanner {
             }
         }
 
+        // ── Go (go.mod → $GOPATH/bin / $GOBIN) ────────────────────
+        if cwd.join("go.mod").is_file() {
+            if let Ok(gopath) = std::env::var("GOPATH") {
+                if !gopath.is_empty() {
+                    let go_bin = std::path::PathBuf::from(&gopath).join("bin");
+                    if go_bin.is_dir() {
+                        dirs.push(go_bin);
+                    }
+                }
+            }
+            if let Ok(gobin) = std::env::var("GOBIN") {
+                if !gobin.is_empty() {
+                    let gbin = std::path::PathBuf::from(&gobin);
+                    if gbin.is_dir() {
+                        dirs.push(gbin);
+                    }
+                }
+            }
+        }
+
         dirs
     }
 
